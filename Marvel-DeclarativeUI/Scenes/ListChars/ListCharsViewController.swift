@@ -21,6 +21,9 @@ public class ListCharsViewController: DeclarativeViewController {
         }
     }.separatorStyle(.none)
     
+    lazy var activityIndicatorNext = ActivityIndicator(style: .gray, startAnimating: false)
+        .color(.black)
+    
     private lazy var view = StateView()
         .onLoading { [stateLoading] in
             stateLoading()
@@ -33,6 +36,7 @@ public class ListCharsViewController: DeclarativeViewController {
     init(viewModel: ListCharsViewModel) {
         self.viewModel = viewModel
         viewModel.getItems()
+        activityIndicatorNext.animate(viewModel.loadingNextPage)
     }
     
     private func row(char: Character, index: Int, action: @escaping (Int) -> Void) -> Row {
@@ -48,7 +52,11 @@ public class ListCharsViewController: DeclarativeViewController {
     private func stateLoading() -> StackView {
         return StackView(.vertical) {
             Spacer(.extraLarge4)
-            Label(text: "...", style: .boldSystemFont())
+            ActivityIndicator()
+                .color(.black)
+            Spacer(.medium)
+            Label(text: "Loading ...", style: .boldSystemFont())
+                .alignment(.center)
             Spacer(.flexible)
         }
     }
@@ -56,8 +64,23 @@ public class ListCharsViewController: DeclarativeViewController {
     private func stateReady() -> StackView {
         return StackView(.vertical) {
             listView
-            Label(text: "...", style: .boldSystemFont())
-                .hidden(when: viewModel.loadingNextPage)
+                .refresh { [viewModel] in
+                    viewModel.getItems()
+                }
+                .didScroll { [viewModel, listView] scrollView in
+                    let maximumOffset = scrollView.contentSize.height - listView.rootView.frame.size.height
+
+                    if viewModel.items.value.isEmpty {
+                        return
+                    }
+
+                    if maximumOffset - scrollView.contentOffset.y <= 0 {
+                        if !viewModel.loadingNextPage.value {
+                            viewModel.getNext()
+                        }
+                    }
+                }
+            activityIndicatorNext
             Spacer(.small)
         }
     }
