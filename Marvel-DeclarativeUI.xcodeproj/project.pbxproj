@@ -771,7 +771,7 @@
 			repositoryURL = "https://github.com/Holistic-Apps-LTDA/DeclarativeUI";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.0.9;
+				minimumVersion = 0.0.10;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

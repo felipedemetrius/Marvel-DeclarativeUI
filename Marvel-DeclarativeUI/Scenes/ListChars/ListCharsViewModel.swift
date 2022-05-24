@@ -27,7 +27,7 @@ class ListCharsViewModel: DeclarativeViewModel<Void, Error> {
                 items.value = result
                 $state.publish(.ready(()))
             case .failure(let error):
-                print(error)
+                $state.publish(.error(error))
             }
         }
     }
@@ -35,13 +35,13 @@ class ListCharsViewModel: DeclarativeViewModel<Void, Error> {
     func getNext() {
         loadingNextPage.value = true
         
-        service.getNext { [loadingNextPage, items] status in
+        service.getNext { [loadingNextPage, items, $state] status in
             loadingNextPage.value = false
             switch status {
             case .success(let result):
                 items.value.append(contentsOf: result)
             case .failure(let error):
-                print(error)
+                $state.publish(.error(error))
             }
         }
     }

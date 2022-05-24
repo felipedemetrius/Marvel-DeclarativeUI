@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Holistic-Apps-LTDA/DeclarativeUI",
       "state" : {
-        "revision" : "6bd061620e6bb75095b56127b8c6e79eb36fe31c",
-        "version" : "0.0.9"
+        "revision" : "2cd88ecdd39d3db1bd629f0c44538a547792b8f8",
+        "version" : "0.0.10"
       }
     }
   ],

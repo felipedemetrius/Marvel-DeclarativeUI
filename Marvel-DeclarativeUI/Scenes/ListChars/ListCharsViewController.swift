@@ -20,10 +20,7 @@ public class ListCharsViewController: DeclarativeViewController {
             }
         }
     }.separatorStyle(.none)
-    
-    lazy var activityIndicatorNext = ActivityIndicator(style: .gray, startAnimating: false)
-        .color(.black)
-    
+        
     private lazy var view = StateView()
         .onLoading { [stateLoading] in
             stateLoading()
@@ -31,12 +28,14 @@ public class ListCharsViewController: DeclarativeViewController {
         .onReady { [stateReady]  in
             stateReady()
         }
+        .onError{ [stateError] error in
+            stateError(error)
+        }
         .observe(viewModel.$state)
 
     init(viewModel: ListCharsViewModel) {
         self.viewModel = viewModel
         viewModel.getItems()
-        activityIndicatorNext.animate(viewModel.loadingNextPage)
     }
     
     private func row(char: Character, index: Int, action: @escaping (Int) -> Void) -> Row {
@@ -80,8 +79,33 @@ public class ListCharsViewController: DeclarativeViewController {
                         }
                     }
                 }
-            activityIndicatorNext
+            ActivityIndicator(style: .gray, startAnimating: false)
+                .color(.black)
+                .animate(viewModel.loadingNextPage)
             Spacer(.small)
+        }
+    }
+
+    private func stateError(error: Error) -> StackView {
+        return StackView(.vertical) {
+            Spacer(.extraLarge4)
+            Label(text: error.localizedDescription, style: .boldSystemFont())
+                .alignment(.center)
+                .padding(.horizontal(.medium))
+            Spacer(.medium)
+            StackView() {
+                ContainerView {
+                    Label(text: "Retry", style: .boldSystemFont(color: .white, ofSize: 20))
+                        .alignment(.center)
+                }.backgroundColor(.black)
+                .width(.extraLarge7)
+                .height(.large)
+                .rounded()
+                .onTap { [viewModel] in
+                    viewModel.getItems()
+                }
+            }.padding(.horizontal(.medium))
+            Spacer(.flexible)
         }
     }
 
