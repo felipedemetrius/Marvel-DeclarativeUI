@@ -25,6 +25,7 @@ class MainlyCoordinator: DeclarativeCoordinator {
         }
         
         let viewController = ListCharsViewController(viewModel: viewModel)
+            .navigationTitle("Characters")
         
         navigator.push(viewController)
     }

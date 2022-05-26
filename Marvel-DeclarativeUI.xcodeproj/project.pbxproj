@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		02427D43283EFE3F000C31E1 /* CharCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02427D42283EFE3F000C31E1 /* CharCell.swift */; };
+		02427D45283EFE6E000C31E1 /* CharCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02427D44283EFE6E000C31E1 /* CharCellViewModel.swift */; };
 		0244E3C1280F922B0084CD37 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0244E3C0280F922B0084CD37 /* AppDelegate.swift */; };
 		0244E3CA280F922C0084CD37 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0244E3C9280F922C0084CD37 /* Assets.xcassets */; };
 		0244E3CD280F922C0084CD37 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0244E3CB280F922C0084CD37 /* LaunchScreen.storyboard */; };
@@ -55,6 +57,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		02427D42283EFE3F000C31E1 /* CharCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharCell.swift; sourceTree = "<group>"; };
+		02427D44283EFE6E000C31E1 /* CharCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharCellViewModel.swift; sourceTree = "<group>"; };
 		0244E3BD280F922B0084CD37 /* Marvel-DeclarativeUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Marvel-DeclarativeUI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0244E3C0280F922B0084CD37 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0244E3C9280F922C0084CD37 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -115,6 +119,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		02427D41283EFE2B000C31E1 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				02427D42283EFE3F000C31E1 /* CharCell.swift */,
+				02427D44283EFE6E000C31E1 /* CharCellViewModel.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		0244E3B4280F922A0084CD37 = {
 			isa = PBXGroup;
 			children = (
@@ -257,6 +270,7 @@
 		0245F4602820A5220065E140 /* ListChars */ = {
 			isa = PBXGroup;
 			children = (
+				02427D41283EFE2B000C31E1 /* Cell */,
 				0245F4612820A53A0065E140 /* ListCharsViewModel.swift */,
 				0245F4632820A5490065E140 /* ListCharsViewController.swift */,
 				0245F4652820A6030065E140 /* ListCharsInteractionEvents.swift */,
@@ -416,6 +430,7 @@
 				0244E40B280F98CD0084CD37 /* Encrypt.swift in Sources */,
 				0244E402280F97080084CD37 /* Requestable+ImageDownloader.swift in Sources */,
 				0244E3C1280F922B0084CD37 /* AppDelegate.swift in Sources */,
+				02427D45283EFE6E000C31E1 /* CharCellViewModel.swift in Sources */,
 				0244E41A280F9B750084CD37 /* ImageDownloaderService.swift in Sources */,
 				0244E416280F9B2A0084CD37 /* CharacterService.swift in Sources */,
 				0245F45E2820A47A0065E140 /* Images.swift in Sources */,
@@ -424,6 +439,7 @@
 				0245F4662820A6030065E140 /* ListCharsInteractionEvents.swift in Sources */,
 				0244E3FE280F966A0084CD37 /* NetworkingError.swift in Sources */,
 				0244E409280F98B40084CD37 /* Authorization.swift in Sources */,
+				02427D43283EFE3F000C31E1 /* CharCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

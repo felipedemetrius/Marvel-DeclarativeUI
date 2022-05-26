@@ -14,12 +14,12 @@ public class ListCharsViewController: DeclarativeViewController {
     private let viewModel: ListCharsViewModel
 
     lazy var listView = ListView(viewModel.items) { [row, viewModel] dataSource in
-        for (index, text) in dataSource.enumerated() {
-            row(text, index) { index in
+        for (index, data) in dataSource.enumerated() {
+            row(data, index) { index in
                 viewModel.selectedItem(index)
             }
         }
-    }.separatorStyle(.none)
+    }.separatorStyle(.singleLine)
         
     private lazy var view = StateView()
         .onLoading { [stateLoading] in
@@ -39,13 +39,13 @@ public class ListCharsViewController: DeclarativeViewController {
     }
     
     private func row(char: Character, index: Int, action: @escaping (Int) -> Void) -> Row {
-        StackView(.horizontal) {
-            Label(text: char.name ?? "", style: .boldSystemFont())
-        }
-        .asRow()
-        .onTap {
-            action(index)
-        }
+        let viewModel = CharCellViewModel(data: char)
+        let cell = CharCell(viewModel: viewModel)
+        return cell
+                .asRow()
+                .onTap {
+                    action(index)
+                }
     }
     
     private func stateLoading() -> StackView {
@@ -68,10 +68,6 @@ public class ListCharsViewController: DeclarativeViewController {
                 }
                 .didScroll { [viewModel, listView] scrollView in
                     let maximumOffset = scrollView.contentSize.height - listView.rootView.frame.size.height
-
-                    if viewModel.items.value.isEmpty {
-                        return
-                    }
 
                     if maximumOffset - scrollView.contentOffset.y <= 0 {
                         if !viewModel.loadingNextPage.value {
